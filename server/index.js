@@ -1,8 +1,16 @@
+require('dotenv').config()
 const express = require('express')
-const app = express()
 const ctrl =require('./controller')
+const massive = require('massive')
 
-const SERVER_PORT = 4000
+const app = express()
+
+const {SERVER_PORT, CONNECTION_STRING} = process.env
+
+massive({
+    connectionString: CONNECTION_STRING,
+    ssl: {rejectUnauthorized: false}
+})
 
 app.use(express.json())
 
