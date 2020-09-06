@@ -6,7 +6,7 @@ export default class Dashboard extends Component {
     return (
       <div>
         {this.props.inventory.map((element) => {
-          return <Product />;
+          return <Product key={element.id} data={element} />;
         })}
       </div>
     );

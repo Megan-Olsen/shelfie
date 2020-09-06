@@ -1,19 +1,22 @@
-require('dotenv').config()
-const express = require('express')
-const ctrl =require('./controller')
-const massive = require('massive')
+require("dotenv").config();
+const express = require("express");
+const ctrl = require("./controller");
+const massive = require("massive");
 
-const app = express()
+const app = express();
 
-const {SERVER_PORT, CONNECTION_STRING} = process.env
+const { SERVER_PORT, CONNECTION_STRING } = process.env;
 
 massive({
-    connectionString: CONNECTION_STRING,
-    ssl: {rejectUnauthorized: false}
-})
+  connectionString: CONNECTION_STRING,
+  ssl: { rejectUnauthorized: false },
+});
 
-app.use(express.json())
+app.use(express.json());
 
+app.get("/api/inventory", ctrl.getInventory);
+// app.post("api/product", ctrl.addProduct);
 
-
-app.listen(SERVER_PORT, () => console.log(`Shhhh.... the Dwarves are working on port ${SERVER_PORT}`))
+app.listen(SERVER_PORT, () =>
+  console.log(`Shhhh.... the Dwarves are working on port ${SERVER_PORT}`)
+);
