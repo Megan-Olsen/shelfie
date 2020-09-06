@@ -13,14 +13,12 @@ massive({
 }).then(dbInstance => {
     app.set('db', dbInstance);
 }).catch(err => console.log(err));
-// .then(dbInstance => {
-    //     app.set('db', dbInstance);
-    // }).catch(err => console.log(err));
+
     
 app.use(express.json());
     
 app.get("/api/inventory", ctrl.getInventory);
-    // app.post("api/product", ctrl.addProduct);
+
     
     
 app.listen(SERVER_PORT, () =>
