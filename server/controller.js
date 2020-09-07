@@ -12,11 +12,10 @@ module.exports = {
   },
 
     
-  createProduct: (name, price, image_url)=> {
-    // const {name, price, image_url} = req.body
-    const newProduct = {name, price, image_url}
-    const newInventory = [newProduct]
-    console.log(newInventory)
+  createProduct: (req, res, next)=> {
+    const dbInstance = req.app.get('db');
+    const {name, price, image_url} = req.body
+    
 
   }
   //   // const dbInstance = req.app.get('db');

@@ -1,2 +1,3 @@
 INSERT INTO products (name, price, image_url)
-VALUES ( , , );
+VALUES ( $1, $2, $3)
+returning *;
