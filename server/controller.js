@@ -12,10 +12,13 @@ module.exports = {
   },
 
     
-  // addProduct: (req, res, next) {
-  //   const {name, price, image_url} = req.body
+  createProduct: (name, price, image_url)=> {
+    // const {name, price, image_url} = req.body
+    const newProduct = {name, price, image_url}
+    const newInventory = [newProduct]
+    console.log(newInventory)
 
-
+  }
   //   // const dbInstance = req.app.get('db');
 
   //   // dbInstance.add_product([ name, price, image_url ]).then( () => res.sendStatus(200) )
