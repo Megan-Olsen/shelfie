@@ -18,7 +18,7 @@ massive({
 app.use(express.json());
     
 app.get("/api/inventory", ctrl.getInventory);
-
+// app.post("/api/product", ctrl.addProduct);
     
     
 app.listen(SERVER_PORT, () =>
