@@ -12,20 +12,18 @@ module.exports = {
   },
 
     
-  createProduct: (req, res, next)=> {
+  createProduct: (req, res)=> {
     const dbInstance = req.app.get('db');
-    const {name, price, image_url} = req.body
+    const { name, price, image_url } = req.body
     
+    dbInstance.create_product([name, price, image_url]).then((product) => {
+      res.status(200).send(product)
+    })
+    .catch (err => {
+      res.status(500).send({errorMessage: "this isn't working"})
+      console.log(err)
+  })
 
   }
-  //   // const dbInstance = req.app.get('db');
-
-  //   // dbInstance.add_product([ name, price, image_url ]).then( () => res.sendStatus(200) )
-  //   //   .catch( (err) => {
-  //   //     res.status(500).send({errorMessage: "Its broken you silly goose."});
-  //   //     console.log(err)
-  //   //   })
-  // }
-
 
 };
