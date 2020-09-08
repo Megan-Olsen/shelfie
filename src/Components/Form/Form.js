@@ -41,7 +41,6 @@ export default class Form extends Component {
     e.preventDefault();
     const { name, price, image_url } = this.state;
     const { getInventory } = this.props;
-    // const product = { name, price, img };
 
     axios.post('/api/product', { name, price, image_url }).then(res => {
       this.setState({
