@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.get("/api/inventory", ctrl.getInventory);
 app.post("/api/product", ctrl.createProduct);
+app.delete("/api/product/:id", ctrl.deleteProduct);
 
 
 massive({
