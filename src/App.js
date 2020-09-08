@@ -11,16 +11,21 @@ export default class App extends Component {
     this.state = {
       inventory: [],
     };
+    this.getInventory = this.getInventory.bind(this)
   }
+  
   componentDidMount(){
+    this.getInventory()
+  }
+  
+  
+  getInventory(){
     axios.get('/api/inventory').then((res) =>{
       this.setState({
         inventory: res.data
       })
     })
   }
-  
-
 
 
 
