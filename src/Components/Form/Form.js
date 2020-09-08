@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class Form extends Component {
   constructor() {
@@ -6,8 +7,9 @@ export default class Form extends Component {
     this.state = {
       name: "",
       price: 0,
-      imgurl: "",
+      image_url: "",
     };
+    this.handleCancel=this.handleCancel.bind(this)
   }
   handleName(e) {
     e.preventDefault();
@@ -24,15 +26,30 @@ export default class Form extends Component {
   handleImgurl(e) {
     e.preventDefault();
     this.setState({
-      imgurl: e.target.value,
+      image_url: e.target.value,
     });
   }
   handleCancel(e) {
     this.setState({
       name: "",
       price: 0,
-      imgurl: "",
+      image_url: "",
     });
+    // this.getInventory = this.getInventory.bind(this)
+  }
+  OnSubmit = e => {
+    e.preventDefault();
+    const { name, price, image_url } = this.state;
+    const { getInventory } = this.props;
+    // const product = { name, price, img };
+
+    axios.post('/api/product', { name, price, image_url }).then(res => {
+      this.setState({
+        inventory: res.data,
+      });
+      getInventory();
+      this.handleCancel();
+    }); 
   }
 
   render() {
@@ -41,7 +58,7 @@ export default class Form extends Component {
         <div>Form</div>
         <div>Image URL:</div>
         <input
-          value={this.state.imgurl}
+          value={this.state.image_url}
           onChange={this.handleImgurl.bind(this)}
         />
         <div>Product Name:</div>
@@ -55,7 +72,7 @@ export default class Form extends Component {
           <button name="cancel" value="cancel" onClick={this.handleCancel}>
             Cancel
           </button>
-          <button name="addToInventory" onClick={this.handleAdd}>
+          <button name="addToInventory" onClick={this.OnSubmit}>
             Add to Inventory
           </button>
         </div>

@@ -17,8 +17,6 @@ export default class App extends Component {
   componentDidMount(){
     this.getInventory()
   }
-  
-  
   getInventory(){
     axios.get('/api/inventory').then((res) =>{
       this.setState({
@@ -34,7 +32,7 @@ export default class App extends Component {
       <div className="App">
         <Header />
         <Dashboard inventory={this.state.inventory} />
-        <Form />
+        <Form getInventory={this.getInventory}/>
       </div>
     );
   }
