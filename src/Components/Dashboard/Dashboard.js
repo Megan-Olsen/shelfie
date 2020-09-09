@@ -1,33 +1,28 @@
-import React, { Component } from "react";
-import Product from "../Product/Product";
-import axios from "axios";
+import React from 'react'
+import Product from '../Product/Product'
+import axios from 'axios'
 
-export default class Dashboard extends Component {
-  constructor(props){
-    super();
-    this.deleteProduct = this.deleteProduct.bind(this);
-  }
+function Dashboard(props) {
+    const deleteProduct = id => {
+        axios
+            .delete(`/api/inventory/${id}`)
+            .then(() => {
+                props.getInventory()
+            })
+            .catch((error) => alert(error, "No Product was found to remove"))
+    }
 
-
-  deleteProduct = id => {
-    axios
-      .delete(`/api/product/${id}`)
-      .then(res => this.props.getInventory())
-      .catch(err => console.log('This be broken!'));
-  };
-
-
-  render() {
     return (
-      <div>
-        {this.props.inventory.map((element) => {
-          return <Product 
-                    key={element.id} 
-                    data={element} 
-                    deleteProduct={this.deleteProduct}/>;
-        })}
-      </div>
-    );
-  }
+        <div className="inventory_container">
+            {props.inventory.map((item) => (
+                <Product
+                    item={item}
+                    deleteProduct={deleteProduct}
+                    updateProduct={props.updateProduct}
+                />
+            ))}
+        </div>
+    )
 }
-// key={element.id} data={element}
+
+export default Dashboard
