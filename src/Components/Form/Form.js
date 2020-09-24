@@ -29,8 +29,7 @@ class Form extends Component {
         });
     }
 
-    addProduct(event) {
-        event.preventDefault()
+    addProduct() {
         const { name, price, image_url } = this.state
         axios.post("/api/product", { name, price, image_url }).then((response) => {
             this.setState({ inventory: response.data })
